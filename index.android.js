@@ -11,7 +11,8 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  FlatList
 } from 'react-native';
 
 const width = Dimensions.get('screen').width;
@@ -25,19 +26,16 @@ export default class InstaluraMobile extends Component {
     ];
 
     return (
-      <View style={{marginTop: 20}}>
-      {fotos.map(foto =>
-        <View>
-        <Text>{foto.usuario}</Text>
-        <Image   
-          style={{width: width, height: width}}       
-          source={require('./foto.png')}
-        />        
-        </View>          
-        )}
-     </View>
-      
-     
+      <FlatList style={{marginTop: 20}}
+    data={fotos}
+    keyExtractor={item => item.id}
+    renderItem={ ({item}) => 
+    <View>
+      <Text>{item.usuario}</Text>
+      <Image source={require('./foto.png')} style={{width:width, height:width}} />
+    </View>
+          }
+    />     
     );
   }
 }
